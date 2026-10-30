@@ -1,4 +1,4 @@
-package com.jonathan.Banco;
+package com.jonathan.banco;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

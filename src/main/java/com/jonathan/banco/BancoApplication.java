@@ -1,4 +1,4 @@
-package com.jonathan.Banco;
+package com.jonathan.banco;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
