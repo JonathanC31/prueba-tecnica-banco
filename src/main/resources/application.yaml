@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Banco
+  datasource:
+    url: jdbc:postgresql://localhost:5433/banco
+    username: prueba
+    password: pruebapass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
