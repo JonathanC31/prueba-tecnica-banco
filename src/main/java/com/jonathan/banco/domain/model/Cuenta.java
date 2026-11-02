@@ -64,4 +64,36 @@ public class Cuenta {
                 .fechaModificacion(LocalDateTime.now())
                 .build();
     }
+    public Cuenta depositar(BigDecimal monto) {
+        validarMontoPositivo(monto);
+        validarActiva();
+        return this.toBuilder()
+                .saldo(saldo.add(monto))
+                .fechaModificacion(LocalDateTime.now())
+                .build();
+    }
+
+    public Cuenta retirar(BigDecimal monto) {
+        validarMontoPositivo(monto);
+        validarActiva();
+        if (saldo.compareTo(monto) < 0) {
+            throw new ReglaNegocioException("Saldo insuficiente");
+        }
+        return this.toBuilder()
+                .saldo(saldo.subtract(monto))
+                .fechaModificacion(LocalDateTime.now())
+                .build();
+    }
+
+    private void validarActiva() {
+        if (estado != EstadoCuenta.ACTIVA) {
+            throw new ReglaNegocioException("La cuenta debe estar activa para operar");
+        }
+    }
+
+    private void validarMontoPositivo(BigDecimal monto) {
+        if (monto == null || monto.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new ReglaNegocioException("El monto debe ser mayor a cero");
+        }
+    }
 }
