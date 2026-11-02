@@ -38,3 +38,11 @@ target/
 # Variables de entorno
 .env
 
+# AI / Agent artifacts
+.gemini/
+.agent/
+.agents/
+.claude/
+CLAUDE.md
+
+

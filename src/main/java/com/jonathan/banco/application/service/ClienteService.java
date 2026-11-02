@@ -2,6 +2,7 @@ package com.jonathan.banco.application.service;
 
 import com.jonathan.banco.application.port.in.*;
 import com.jonathan.banco.application.port.out.IClienteRepositoryPort;
+import com.jonathan.banco.application.port.out.ICuentaRepositoryPort;
 import com.jonathan.banco.domain.exception.RecursoNoEncontradoException;
 import com.jonathan.banco.domain.exception.ReglaNegocioException;
 import com.jonathan.banco.domain.model.Cliente;
@@ -19,6 +20,7 @@ public class ClienteService implements ICrearClienteUseCase, IActualizarClienteU
         IEliminarClienteUseCase, IConsultarClienteUseCase {
 
     private final IClienteRepositoryPort clienteRepository;
+    private final ICuentaRepositoryPort cuentaRepository;
 
     @Override
     @Transactional
@@ -49,7 +51,9 @@ public class ClienteService implements ICrearClienteUseCase, IActualizarClienteU
     @Transactional
     public void eliminar(Long id) {
         buscarPorId(id);   // lanza 404 si no existe
-        // TODO (módulo cuentas): si tiene productos vinculados -> ReglaNegocioException
+        if (cuentaRepository.existePorClienteId(id)) {
+            throw new ReglaNegocioException("No se puede eliminar un cliente con productos vinculados");
+        }
         clienteRepository.eliminar(id);
         log.info("Cliente eliminado id={}", id);
     }
