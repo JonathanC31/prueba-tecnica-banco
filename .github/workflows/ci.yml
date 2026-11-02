@@ -1,0 +1,33 @@
+name: CI Backend (Tests + JaCoCo)
+
+on:
+  pull_request:
+    branches: [ "develop", "main" ]
+  push:
+    branches: [ "develop" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: 3. Ejecutar pruebas y generar reporte JaCoCo
+        run: ./mvnw -B verify
+
+      - name: 4. Subir reporte JaCoCo como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+          retention-days: 7

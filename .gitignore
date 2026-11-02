@@ -35,8 +35,14 @@ target/
 .project
 .settings/
 
-# Variables de entorno
+# Variables de entorno y artefactos de despliegue
 .env
+.env.*
+!.env.example
+deploy.zip
+*.jsa
+.aws/
+*.pem
 
 # AI / Agent artifacts
 .gemini/

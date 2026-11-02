@@ -2,11 +2,14 @@ spring:
   application:
     name: Banco
   datasource:
-    url: jdbc:postgresql://localhost:5433/banco
-    username: prueba
-    password: pruebapass
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/banco}
+    username: ${SPRING_DATASOURCE_USERNAME:prueba}
+    password: ${SPRING_DATASOURCE_PASSWORD:pruebapass}
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: true
+
+server:
+  port: ${PORT:8080}
