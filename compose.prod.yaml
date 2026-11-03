@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-banco}
       POSTGRES_USER: ${POSTGRES_USER:-prueba}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-BancoSeguro2026*}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     mem_limit: 200m
@@ -26,7 +26,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-banco}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-prueba}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-BancoSeguro2026*}
       SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO:-update}
     mem_limit: 450m
     depends_on:

@@ -57,10 +57,10 @@ jobs:
       - name: 7. Preparar paquete de despliegue para Elastic Beanstalk
         run: |
           cp compose.prod.yaml docker-compose.yml
-          zip -r deploy.zip docker-compose.yml .ebextensions
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" > .env
+          zip -r deploy.zip docker-compose.yml .env .ebextensions
 
       - name: 8. Desplegar en AWS Elastic Beanstalk
-        if: ${{ secrets.AWS_ACCESS_KEY_ID != '' }}
         uses: einaregilsson/beanstalk-deploy@v22
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
