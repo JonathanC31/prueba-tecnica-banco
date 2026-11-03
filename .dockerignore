@@ -1,0 +1,34 @@
+# Control de versiones y artefactos de compilacion
+.git
+.gitignore
+.github
+target
+**/*.class
+
+# IDEs
+.idea
+*.iml
+.vscode
+.classpath
+.project
+.settings
+
+# Secretos y configuracion local
+.env
+.env.*
+!.env.example
+
+# Documentacion y archivos del despliegue (no se necesitan para compilar)
+*.md
+docs
+deploy.zip
+compose*.yaml
+compose*.yml
+Dockerfile
+.dockerignore
+
+# Directorios de agentes IA
+.gemini
+.agent
+.agents
+.claude
